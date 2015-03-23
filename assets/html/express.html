@@ -1,0 +1,55 @@
+<div class="row" style="margin-bottom: 20px">
+    <div class="col-md-9"></div>
+    <div class="col-md-2">
+        <select class="form-control pull-right"
+                style="margin-right: -30px"
+                ng-init="defaultExpressStatus = expressStatuses[0].val"
+                ng-model="defaultExpressStatus"
+                ng-options="expressStatus.val as expressStatus.status for expressStatus in expressStatuses" >
+        </select>
+        
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-primary pull-right span2" ng-click="modifyExpress(sumOfModifyExpress())">确认</button>
+    </div>
+</div>
+<div class="tableScroll" style="margin-bottom: 20px" resize>
+
+    <table class="table-bordered table-striped table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <input type="checkbox" ng-click="checkAll(isCheckAll)" ng-model="isCheckAll"/>
+                </th>
+                <th class="text-center">用户名</th>
+                <th class="text-center">手机</th>
+                <th class="text-center">宿舍地址</th>
+                <th class="text-center">快递公司</th>
+                <th class="text-center">快递时间</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">快递状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="express in expresses">
+                <td class="text-center">
+                    <input type="checkbox" ng-model="express.checked"/>
+                </td>
+                <td class="text-center">{{express.username}}</td>
+                <td class="text-center">{{express.mobile}}</td>
+                <td class="text-center">{{express.address}}</td>
+                <td class="text-center">{{express.company}}</td>
+                <td class="text-center">{{express.time|timeFilter}}</td>
+                <td class="text-center">{{express.createdAt|timeFilter}}</td>
+                <td class="text-center">
+                    <span class='label' ng-class="expressStatuses[express.status].css">{{expressStatuses[express.status].status}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-12 text-center">
+    <button class="btn btn-info" ng-click="lessExpress()" ng-class="{disabled:lessBtnDisabled}">收起</button>
+    <button class="btn btn-info" ng-click="getExpresses()" ng-class="{disabled:moreBtnDisabled}">更多</button>
+</div>

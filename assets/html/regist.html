@@ -1,0 +1,36 @@
+<div class="col-md-4"></div>
+<div class="col-md-4 center">
+	<div class="form-group">
+	<div class="alert alert-danger" role="alert" ng-show='errMsg!=undefined'>
+	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	  <span class="sr-only">Error:</span>
+	  {{errMsg}}
+	</div>
+	</div>
+	<form name='registFrom' novalidate ng-submit="registAdminUser(userinFrom)">
+		<div class="form-group" ng-class="{'has-error': registFrom.username.$invalid && registFrom.username.$dirty}">
+	    	<input type="text" class="form-control" placeholder="用户名" name='username' ng-model='userinFrom.username' required>
+	    	<span class="help-block" ng-show="registFrom.username.$error.required && registFrom.username.$dirty">用户名必填</span>
+	  	</div>
+	  	<div class="form-group" ng-class="{'has-error': registFrom.password.$invalid && registFrom.password.$dirty}">
+	      <input type="password" class="form-control" placeholder="密码" name='password' ng-model='userinFrom.password' required id='password'>
+	      <span class="help-block" ng-show="registFrom.password.$error.required && registFrom.password.$dirty">密码必填</span>
+	  	</div>
+	  	<div class="form-group" ng-class="{'has-error': (registFrom.passwordConfirm.$invalid && registFrom.passwordConfirm.$dirty)||pwdCheckBlur}">
+	      <input type="password" class="form-control" placeholder="密码" name='passwordConfirm' ng-model='userinFrom.passwordConfirm' required id='passwordConfirm' ng-blur="passwordConfirmBlur()">
+	      <span class="help-block" ng-show="registFrom.passwordConfirm.$error.required && registFrom.passwordConfirm.$dirty">请确认密码</span>
+	      <span class="help-block" ng-show="pwdCheckBlur">两次密码不同</span>
+	  	</div>
+	  	<div class="form-group">
+  			<img ng-src="data:image/png;base64,{{imageData}}" ng-click="generateSecurityCode()">	
+	  	</div>
+	  	<div class="form-group" ng-class="{'has-error': registFrom.securityCode.$invalid && registFrom.securityCode.$dirty}">
+	  			<input type="text" class="form-control" placeholder="验证码" name='securityCode' ng-model='userinFrom.securityCode' required>
+	  			<span class="help-block" ng-show="registFrom.securityCode.$error.required && registFrom.securityCode.$dirty">验证码必填</span>
+	  		</div>
+	  	<div class="form-group">
+	  		<button class="btn btn-success col-md-12" type="submit" ng-disabled="!registFrom.$valid||pwdError">注册</button>
+	  	</div>
+	</form>
+</div>
+<div class="col-md-4"></div>

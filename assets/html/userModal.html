@@ -1,0 +1,26 @@
+<div class="modal-header">
+	<select class="form-control"
+                ng-init="defaultUserAction = userActions[0].value"
+                ng-model="defaultUserAction"
+                ng-options="userAction.value as userAction.msg for userAction in userActions" ></select>
+</div>
+<div class="modal-body">
+	<form ng-show="defaultUserAction == 'modify'">
+		<div class="form-group">
+			<label for="username" class="control-label">用户名</label>
+			<input type="text" class="form-control" id="username" ng-model='selectedUser.username'>
+		</div>
+		<div class="form-group">
+			<label for="mobile" class="control-label">手机</label>
+			<input type="text" class="form-control" id="mobile" ng-model='selectedUser.mobile'>
+		</div>
+		<div class="form-group">
+			<label for="address" class="control-label">宿舍地址</label>
+			<input type="text" class="form-control" id="address" ng-model='selectedUser.address'>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

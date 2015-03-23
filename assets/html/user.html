@@ -1,0 +1,41 @@
+<div class="row" style="margin-bottom: 20px">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="用户名,手机号,宿舍地址" ng-model='userKeyword'>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="getUsersWithKeyWord(userKeyword)" ng-class="{disabled:!userKeyword}">搜索</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="tableScroll" style="margin-bottom: 20px" resize>
+
+    <table class="table-bordered table-striped table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">用户名</th>
+                <th class="text-center">手机</th>
+                <th class="text-center">宿舍地址</th>
+                <th class="text-center">注册时间</th>
+                <th class="text-center">修改或删除</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users">
+                <th class="text-center">{{user.username}}</th>
+                <th class="text-center">{{user.mobile}}</th>
+                <th class="text-center">{{user.address}}</th>
+                <th class="text-center">{{user.createdAt|timeFilter}}</th>
+                <th class="text-center">
+                    <button class="btn btn-primary btn-sm" ng-click="editUser($index)">编辑</button>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-12 text-center">
+    <button class="btn btn-info" ng-click="lessUsers()" ng-class="{disabled:lessBtnDisabled}">收起</button>
+    <button class="btn btn-info" ng-click="getUsers()" ng-class="{disabled:moreBtnDisabled}">更多</button>
+</div>
