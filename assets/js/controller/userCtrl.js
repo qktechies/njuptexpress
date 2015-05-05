@@ -52,7 +52,7 @@ angular.module('express')
 	$scope.editUser = function(index) {
 
 		var modalInstance = $modal.open({
-			templateUrl: 'userModal.html',
+			templateUrl: '/html/userModal.html',
 			controller: 'userModalCtrl',
 			//size: 'sm',
 			resolve: {

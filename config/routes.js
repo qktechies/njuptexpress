@@ -48,6 +48,8 @@ module.exports.routes = {
 
   'post /user/login':'UserController.login',
 
+  'post /user/regist':'UserController.regist',
+
   'post /user/logout':'UserController.logout',
 
   'post /adminUser/login':'AdminUserController.login',
@@ -56,6 +58,8 @@ module.exports.routes = {
 
   'post /adminUser/regist': 'AdminUserController.regist',
 
-  'get /securityCode':'SecurityCodeController.getOneSecurity'
+  'get /securityCode':'SecurityCodeController.getOneSecurity',
+
+  'post /memberExpress/save': 'MemberExpressController.save'
 
 };

@@ -42,10 +42,10 @@ module.exports.connections = {
   ***************************************************************************/
   someMysqlServer: {
     adapter: 'sails-mysql',
-    host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
-    user: 'YOUR_MYSQL_USER',
-    password: 'YOUR_MYSQL_PASSWORD',
-    database: 'YOUR_MYSQL_DB'
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'root',
+    database: 'blog'
   },
 
   /***************************************************************************
@@ -58,11 +58,11 @@ module.exports.connections = {
   ***************************************************************************/
   mongodb: {
     adapter: 'sails-mongo',
-    host: process.env.OPENSHIFT_MONGODB_DB_HOST,
-    port: process.env.OPENSHIFT_MONGODB_DB_PORT,
-    user: 'admin',
-    password: 'P_xtN3WDMrY9',
-    database: 'nodejs'
+    host: '127.0.0.1',
+    port: 27017,
+    user: 'express',
+    password: 'express',
+    database: 'express'
   },
 
   /***************************************************************************

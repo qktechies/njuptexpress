@@ -12,7 +12,7 @@ expressApp.config(['$stateProvider',
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/login");
 
     $stateProvider
     .state("login", {
@@ -39,6 +39,11 @@ expressApp.config(['$stateProvider',
         url:"/express",
         templateUrl: "/html/express.html",
         controller: "expressCtrl"
+    })
+    .state("memberExpress", {
+        url:"/memberExpress",
+        templateUrl: "/html/memberExpress.html",
+        controller: "memberExpressCtrl"
     })
 }])
 

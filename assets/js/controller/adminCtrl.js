@@ -93,7 +93,7 @@ angular.module('express')
 
     $scope.deleteAdmin = function(index){
     	var modalInstance = $modal.open({
-			templateUrl: 'adminDeleteModal.html',
+			templateUrl: '/html/adminDeleteModal.html',
 			controller: 'adminModalCtrl',
 			//size: 'sm',
 			resolve: {

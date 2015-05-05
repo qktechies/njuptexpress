@@ -28,7 +28,7 @@
             username: username
           }).exec(function(err, user) {
             if (err != null) {
-              return cb(err);
+              return cb('服务器内部错误');
             }
             if (user == null) {
               return cb('用户名不存在');
@@ -38,7 +38,7 @@
         }, function(user, cb) {
           return bcrypt.compare(password, user.password, function(err, match) {
             if (err != null) {
-              return cb(err);
+              return cb('服务器内部错误');
             }
             if (!match) {
               return cb('用户密码错误');
@@ -49,18 +49,78 @@
         }
       ], function(err, user) {
         if (err) {
-          return res.status(400).send(err);
+          return res.json({
+            status: false,
+            result: err
+          });
         }
         req.session.authenticated = true;
         req.session.username = user.username;
-        return res.status(200).json(user);
+        return res.json({
+            status: true,
+            result: user
+        });
       });
     },
+
     logout: function(req, res) {
       req.session.destroy();
       return res.json({
         status: true,
         result: '登出成功'
+      });
+    },
+
+    regist: function(req, res){
+      var username = req.body.username
+      var mobile = req.body.mobile
+      var password = req.body.password
+      var address = req.body.address
+      async.waterfall([
+        function(cb){
+          if(!username)
+            return cb('用户名不能为空')
+          if(!mobile)
+            return cb('手机不能为空')
+          if(!password)
+            return cb('密码不能为空')
+          if(!address)
+            return cb('宿舍地址不能为空')
+          cb(null)
+        },
+        function(cb){
+          User.findOne({
+            username: username
+          }).exec(function(err, user){
+            if(err)
+              return cb('服务器内部错误')
+            if(user)
+              return cb('用户已经存在')
+            cb(null)
+          })
+        },
+        function(cb){
+          User.create({
+            username: username,
+            mobile: mobile,
+            password: password,
+            address: address
+          }).exec(function(err,user){
+            if(err)
+              return cb('服务器内部错误')
+            cb(null, user)
+          })
+        }
+      ], function (err, user) {
+        if(err)
+          return res.json({
+            status: false,
+            result: err
+          })
+        res.json({
+          status: true,
+          result: user
+        })
       });
     }
   };

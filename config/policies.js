@@ -28,6 +28,7 @@ module.exports.policies = {
 
   '*': false,
 
+  //管理员
   AdminUserController:{
     '*':'adminAuth',
     'login':true,
@@ -35,14 +36,24 @@ module.exports.policies = {
     'logout':'adminAuth'
   },
 
+  //非会员快递
   ExpressController:{
     '*':'adminOrUserAuth',
     'create':'sessionAuth'
   },
 
+  //会员快递
+  MemberExpressController: {
+    '*': false,
+    'save': 'sessionAuth',
+    'destroy': 'adminOrUserAuth',
+    'find': 'adminOrUserAuth',
+    'update': 'adminAuth'
+  },
+
   UserController:{
     '*':'adminOrUserAuth',
-    'create': true,
+    'regist': true,
     'login':true,
     'logout':'sessionAuth'
   },
@@ -50,6 +61,10 @@ module.exports.policies = {
   SecurityCodeController: {
     '*': false,
     'getOneSecurity': true
+  },
+
+  AdviceController: {
+    'create': true
   }
 
   /***************************************************************************
